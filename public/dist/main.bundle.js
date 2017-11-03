@@ -126,7 +126,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "/* Remove margins and padding from the list */\nul {\n  margin: 0;\n  padding: 0;\n}\n\n/* Style the list items */\nul li {\n  cursor: pointer;\n  position: relative;\n  padding: 12px 8px 12px 40px;\n  background: #eee;\n  font-size: 18px;\n  transition: 0.2s;\n\n  /* make the list items unselectable */\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Set all odd list items to a different color (zebra-stripes) */\nul li:nth-child(odd) {\n  background: #f9f9f9;\n}\n\n/* Darker background-color on hover */\nul li:hover {\n  background: #ddd;\n}\n\n/* When clicked on, add a background color and strike out text */\nul li.checked {\n  background: #888;\n  color: #fff;\n  text-decoration: line-through;\n}\n\n/* Add a \"checked\" mark when clicked on */\nul li.checked::before {\n  content: '';\n  position: absolute;\n  border-color: #fff;\n  border-style: solid;\n  border-width: 0 2px 2px 0;\n  top: 10px;\n  left: 16px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n  height: 15px;\n  width: 7px;\n}\n\n/* Style the close button */\n.close {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 12px 16px 12px 16px;\n}\n\n.close:hover {\n  background-color: #f44336;\n  color: white;\n}\n", ""]);
 
 // exports
 
@@ -139,7 +139,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/todo-list/todo-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  todo-list works!\n</p>\n"
+module.exports = "<!--<table>-->\n  <!--<thead>-->\n  <!--<tr>-->\n    <!--<th>UserName</th>-->\n    <!--<th>Work</th>-->\n    <!--<th>Status(check if done)</th>-->\n  <!--</tr>-->\n  <!--</thead>-->\n  <!--<tbody>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--{{username}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n        <!--{{workToComplete}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--<input type=\"checkbox\" name=\"status\" value=\"checked\" checked={{checked}}/>-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--</tbody>-->\n<!--</table>-->\n\n<ul id=\"myUL\">\n  <li>Hit the gym</li>\n  <li>Pay bills</li>\n  <li>Meet George</li>\n  <li>Buy eggs</li>\n  <li>Read a book</li>\n  <li>Organize office</li>\n</ul>\n"
 
 /***/ }),
 
@@ -187,7 +187,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "/* Style the header */\n.header {\n  background-color: #f44336;\n  padding: 30px 40px;\n  color: white;\n  text-align: center;\n}\n\n/* Clear floats after the header */\n.header:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n\n/* Style the input */\ninput {\n  border: none;\n  width: 75%;\n  padding: 10px;\n  float: left;\n  font-size: 16px;\n}\n\n/* Style the \"Add\" button */\n.addBtn {\n  padding: 10px;\n  width: 25%;\n  background: #d9d9d9;\n  color: #555;\n  float: left;\n  text-align: center;\n  font-size: 16px;\n  cursor: pointer;\n  transition: 0.3s;\n}\n\n.addBtn:hover {\n  background-color: #bbb;\n}\n", ""]);
 
 // exports
 
@@ -200,7 +200,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/todo/todo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <label for=\"username\">UserName</label>\n  <input id=\"username\" type=\"text\" disabled value={{2+3}}/>\n  <label for=\"todo\">Todo:</label>\n  <input type=\"text\" id=\"todo\" placeholder=\"Your todos\"/>\n  <label for=\"status\">Status</label>\n  <select id=\"status\" name=\"status\">\n    <option value=\"done\">Done</option>\n    <option value=\"todo\">Todo</option>\n  </select>\n</form>\n"
+module.exports = "<!--<form>-->\n  <!--<label for=\"username\">UserName</label>-->\n  <!--<input id=\"username\" type=\"text\" disabled value={{2+3}}/>-->\n  <!--<label for=\"todo\">Todo:</label>-->\n  <!--<input type=\"text\" id=\"todo\" placeholder=\"Your todos\"/>-->\n  <!--<label for=\"status\">Status</label>-->\n  <!--<select id=\"status\" name=\"status\">-->\n    <!--<option value=\"done\">Done</option>-->\n    <!--<option value=\"todo\">Todo</option>-->\n  <!--</select>-->\n<!--</form>-->\n\n<div id=\"myDIV\" class=\"header\">\n  <h2>My To Do List</h2>\n  <input type=\"text\" id=\"myInput\" placeholder=\"Title...\">\n  <span class=\"addBtn\">Add</span>\n</div>\n"
 
 /***/ }),
 
