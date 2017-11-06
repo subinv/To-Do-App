@@ -21,7 +21,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.overlay {\n  /* Height & width depends on how you want to reveal the overlay (see JS below) */\n  height: 100%;\n  width: 100%;\n  position: fixed; /* Stay in place */\n  z-index: 1; /* Sit on top */\n  left: 0;\n  top: 0;\n  background-color: rgb(0,0,0); /* Black fallback color */\n  background-color: rgba(0,0,0, 0.9); /* Black w/opacity */\n  overflow-x: hidden; /* Disable horizontal scroll */\n}\n\n.loader {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  z-index: 1;\n  width: 120px;\n  height: 120px;\n  margin: -75px 0 0 -75px;\n  border: 16px solid #f3f3f3;\n  border-radius: 50%;\n  border-top: 16px solid #3498db;\n  -webkit-animation: spin 2s linear infinite;\n  animation: spin 2s linear infinite;\n}\n\n@-webkit-keyframes spin {\n  0% { -webkit-transform: rotate(0deg); }\n  100% { -webkit-transform: rotate(360deg); }\n}\n\n@keyframes spin {\n  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }\n  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }\n}\n", ""]);
 
 // exports
 
@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<!--<app-todo [pageTitle]='app' (pageTitleClicked)=\"onPageTitleClicked($event)\"></app-todo>-->\n\n<app-todo></app-todo>\n<app-todo-list></app-todo-list>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<!--<app-todo [pageTitle]='app' (pageTitleClicked)=\"onPageTitleClicked($event)\"></app-todo>-->\n\n<div *ngIf=\"loader\" class=\"overlay\">\n  <div class=\"loader\"></div>\n</div>\n{{valueFromTodo}}\n<app-todo (addButtonClicked)=\"addButtonClicked($event)\"></app-todo>\n<app-todo-list></app-todo-list>\n<!--<div class=\"loader\"></div>-->\n"
 
 /***/ }),
 
@@ -53,10 +53,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var AppComponent = (function () {
     function AppComponent() {
+        var _this = this;
         this.title = 'apptoDo';
+        this.loader = false;
         this.app = "From Main App";
         this.onPageTitleClicked = function ($event) {
             console.log($event);
+            _this.valueFromTodo = $event;
+        };
+        this.addButtonClicked = function ($event) {
+            _this.loader = $event.value;
         };
     }
     return AppComponent;
@@ -139,7 +145,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/todo-list/todo-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--<table>-->\n  <!--<thead>-->\n  <!--<tr>-->\n    <!--<th>UserName</th>-->\n    <!--<th>Work</th>-->\n    <!--<th>Status(check if done)</th>-->\n  <!--</tr>-->\n  <!--</thead>-->\n  <!--<tbody>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--{{username}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n        <!--{{workToComplete}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--<input type=\"checkbox\" name=\"status\" value=\"checked\" checked={{checked}}/>-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--</tbody>-->\n<!--</table>-->\n\n<ul id=\"myUL\">\n  <li>Hit the gym</li>\n  <li>Pay bills</li>\n  <li>Meet George</li>\n  <li>Buy eggs</li>\n  <li>Read a book</li>\n  <li>Organize office</li>\n</ul>\n"
+module.exports = "<!--<table>-->\n  <!--<thead>-->\n  <!--<tr>-->\n    <!--<th>UserName</th>-->\n    <!--<th>Work</th>-->\n    <!--<th>Status(check if done)</th>-->\n  <!--</tr>-->\n  <!--</thead>-->\n  <!--<tbody>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--{{username}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n        <!--{{workToComplete}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--<input type=\"checkbox\" name=\"status\" value=\"checked\" checked={{checked}}/>-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--</tbody>-->\n<!--</table>-->\n\n<ul id=\"todo-list\">\n  <li>Hit the gym</li>\n  <li>Pay bills</li>\n  <li>Meet George</li>\n  <li>Buy eggs</li>\n  <li>Read a book</li>\n  <li>Organize office</li>\n</ul>\n"
 
 /***/ }),
 
@@ -187,7 +193,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* Style the header */\n.header {\n  background-color: #f44336;\n  padding: 30px 40px;\n  color: white;\n  text-align: center;\n}\n\n/* Clear floats after the header */\n.header:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n\n/* Style the input */\ninput {\n  border: none;\n  width: 75%;\n  padding: 10px;\n  float: left;\n  font-size: 16px;\n}\n\n/* Style the \"Add\" button */\n.addBtn {\n  padding: 10px;\n  width: 25%;\n  background: #d9d9d9;\n  color: #555;\n  float: left;\n  text-align: center;\n  font-size: 16px;\n  cursor: pointer;\n  transition: 0.3s;\n}\n\n.addBtn:hover {\n  background-color: #bbb;\n}\n", ""]);
+exports.push([module.i, "/* Style the header */\n.header {\n  background-color: #000;\n  padding: 30px 40px;\n  color: white;\n  text-align: center;\n}\n\n/* Clear floats after the header */\n.header:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n\n/* Style the input */\ninput#my-todo{\n  border: none;\n  width: 75%;\n  padding: 10px;\n  float: left;\n  font-size: 16px;\n}\n\n/* Style the \"Add\" button */\n.addBtn {\n  padding: 10px;\n  width: 25%;\n  background: #d9d9d9;\n  color: #555;\n  float: left;\n  text-align: center;\n  font-size: 16px;\n  cursor: pointer;\n  transition: 0.3s;\n}\n\n.addBtn:hover {\n  background-color: #bbb;\n}\n", ""]);
 
 // exports
 
@@ -200,7 +206,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/todo/todo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--<form>-->\n  <!--<label for=\"username\">UserName</label>-->\n  <!--<input id=\"username\" type=\"text\" disabled value={{2+3}}/>-->\n  <!--<label for=\"todo\">Todo:</label>-->\n  <!--<input type=\"text\" id=\"todo\" placeholder=\"Your todos\"/>-->\n  <!--<label for=\"status\">Status</label>-->\n  <!--<select id=\"status\" name=\"status\">-->\n    <!--<option value=\"done\">Done</option>-->\n    <!--<option value=\"todo\">Todo</option>-->\n  <!--</select>-->\n<!--</form>-->\n\n<div id=\"myDIV\" class=\"header\">\n  <h2>My To Do List</h2>\n  <input type=\"text\" id=\"myInput\" placeholder=\"Title...\">\n  <span class=\"addBtn\">Add</span>\n</div>\n"
+module.exports = "<!--<form>-->\n  <!--<label for=\"username\">UserName</label>-->\n  <!--<input id=\"username\" type=\"text\" disabled value={{2+3}}/>-->\n  <!--<label for=\"todo\">Todo:</label>-->\n  <!--<input type=\"text\" id=\"todo\" placeholder=\"Your todos\"/>-->\n  <!--<label for=\"status\">Status</label>-->\n  <!--<select id=\"status\" name=\"status\">-->\n    <!--<option value=\"done\">Done</option>-->\n    <!--<option value=\"todo\">Todo</option>-->\n  <!--</select>-->\n<!--</form>-->\n\n<form id=\"add-todo\" class=\"header\">\n  <h2>My To Do List</h2>\n    <input type=\"text\" id=\"my-todo\" placeholder=\"Title......\">\n    <span type=\"submit\" class=\"addBtn\" (click)=\"addButtonClick()\">Add</span>\n</form>\n"
 
 /***/ }),
 
@@ -224,9 +230,14 @@ var TodoComponent = (function () {
     function TodoComponent() {
         var _this = this;
         this.pageTitleClicked = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+        this.addButtonClicked = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         this.OnClicked = function () {
-            console.log("clciked");
+            console.log("clicked");
             _this.pageTitleClicked.emit("emitted value");
+        };
+        this.addButtonClick = function (event) {
+            //event.preventDefault();
+            _this.addButtonClicked.emit({ value: true });
         };
     }
     return TodoComponent;
@@ -239,6 +250,10 @@ __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
     __metadata("design:type", Object)
 ], TodoComponent.prototype, "pageTitleClicked", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+    __metadata("design:type", Object)
+], TodoComponent.prototype, "addButtonClicked", void 0);
 TodoComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'app-todo',
