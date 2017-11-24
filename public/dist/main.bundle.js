@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<!--<app-todo [pageTitle]='app' (pageTitleClicked)=\"onPageTitleClicked($event)\"></app-todo>-->\n\n<div *ngIf=\"loader\" class=\"overlay\">\n  <div class=\"loader\"></div>\n</div>\n{{valueFromTodo}}\n<app-todo (addButtonClicked)=\"addButtonClicked($event)\"></app-todo>\n<app-todo-list></app-todo-list>\n<!--<div class=\"loader\"></div>-->\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<!--<app-todo [pageTitle]='app' (pageTitleClicked)=\"onPageTitleClicked($event)\"></app-todo>-->\n\n<div *ngIf=\"loader\" class=\"overlay\">\n  <div class=\"loader\"></div>\n</div>\n<!-- {{valueFromTodo}} -->\n<app-todo (addButtonClicked)=\"addButtonClicked($event)\"></app-todo>\n<app-todo-list></app-todo-list>\n<!--<div class=\"loader\"></div>-->\n"
 
 /***/ }),
 
@@ -62,6 +62,7 @@ var AppComponent = (function () {
             _this.valueFromTodo = $event;
         };
         this.addButtonClicked = function ($event) {
+            //console.log($event);
             _this.loader = $event.value;
         };
     }
@@ -89,12 +90,16 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__todo_todo_component__ = __webpack_require__("../../../../../src/app/todo/todo.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__todo_list_todo_list_component__ = __webpack_require__("../../../../../src/app/todo-list/todo-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__todo_service__ = __webpack_require__("../../../../../src/app/todo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -113,9 +118,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__todo_list_todo_list_component__["a" /* TodoListComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */]
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* HttpModule */]
         ],
-        providers: [],
+        providers: [__WEBPACK_IMPORTED_MODULE_5__todo_service__["a" /* TodoService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -132,7 +137,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* Remove margins and padding from the list */\nul {\n  margin: 0;\n  padding: 0;\n}\n\n/* Style the list items */\nul li {\n  cursor: pointer;\n  position: relative;\n  padding: 12px 8px 12px 40px;\n  background: #eee;\n  font-size: 18px;\n  transition: 0.2s;\n\n  /* make the list items unselectable */\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Set all odd list items to a different color (zebra-stripes) */\nul li:nth-child(odd) {\n  background: #f9f9f9;\n}\n\n/* Darker background-color on hover */\nul li:hover {\n  background: #ddd;\n}\n\n/* When clicked on, add a background color and strike out text */\nul li.checked {\n  background: #888;\n  color: #fff;\n  text-decoration: line-through;\n}\n\n/* Add a \"checked\" mark when clicked on */\nul li.checked::before {\n  content: '';\n  position: absolute;\n  border-color: #fff;\n  border-style: solid;\n  border-width: 0 2px 2px 0;\n  top: 10px;\n  left: 16px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n  height: 15px;\n  width: 7px;\n}\n\n/* Style the close button */\n.close {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 12px 16px 12px 16px;\n}\n\n.close:hover {\n  background-color: #f44336;\n  color: white;\n}\n", ""]);
+exports.push([module.i, "/* Remove margins and padding from the list */\nul {\n  margin: 0;\n  padding: 0;\n}\n\n/* Style the list items */\nul li {\n  cursor: pointer;\n  position: relative;\n  padding: 12px 8px 12px 40px;\n  background: #eee;\n  font-size: 18px;\n  transition: 0.2s;\n\n  /* make the list items unselectable */\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Set all odd list items to a different color (zebra-stripes) */\nul li:nth-child(odd) {\n  background: #f9f9f9;\n}\n\nul li:nth-child(even) {\n  background: black;\n  color: white;\n}\n\n/* Darker background-color on hover */\nul li:hover {\n  background: #ddd;\n}\n\n/* When clicked on, add a background color and strike out text */\nul li.checked {\n  background: #888;\n  color: #fff;\n  text-decoration: line-through;\n}\n\n/* Add a \"checked\" mark when clicked on */\nul li.checked::before {\n  content: '';\n  position: absolute;\n  border-color: #fff;\n  border-style: solid;\n  border-width: 0 2px 2px 0;\n  top: 10px;\n  left: 16px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n  height: 15px;\n  width: 7px;\n}\n\n/* Style the close button */\n.close {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 12px 16px 12px 16px;\n}\n\n.close:hover {\n  background-color: #f44336;\n  color: white;\n}\n", ""]);
 
 // exports
 
@@ -145,7 +150,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/todo-list/todo-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--<table>-->\n  <!--<thead>-->\n  <!--<tr>-->\n    <!--<th>UserName</th>-->\n    <!--<th>Work</th>-->\n    <!--<th>Status(check if done)</th>-->\n  <!--</tr>-->\n  <!--</thead>-->\n  <!--<tbody>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--{{username}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n        <!--{{workToComplete}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--<input type=\"checkbox\" name=\"status\" value=\"checked\" checked={{checked}}/>-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--</tbody>-->\n<!--</table>-->\n\n<ul id=\"todo-list\">\n  <li>Hit the gym</li>\n  <li>Pay bills</li>\n  <li>Meet George</li>\n  <li>Buy eggs</li>\n  <li>Read a book</li>\n  <li>Organize office</li>\n</ul>\n"
+module.exports = "<!--<table>-->\n  <!--<thead>-->\n  <!--<tr>-->\n    <!--<th>UserName</th>-->\n    <!--<th>Work</th>-->\n    <!--<th>Status(check if done)</th>-->\n  <!--</tr>-->\n  <!--</thead>-->\n  <!--<tbody>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--{{username}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n        <!--{{workToComplete}}-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--<tr>-->\n    <!--<td>-->\n      <!--<input type=\"checkbox\" name=\"status\" value=\"checked\" checked={{checked}}/>-->\n    <!--</td>-->\n  <!--</tr>-->\n  <!--</tbody>-->\n<!--</table>-->\n\n<ul id=\"todo-list\">\n  <li *ngFor=\"let data of data\">{{data.todo}}</li>\n  <!-- <li>Hit the gym</li>\n  <li>Pay bills</li>\n  <li>Meet George</li>\n  <li>Buy eggs</li>\n  <li>Read a book</li>\n  <li>Organize office</li> -->\n</ul>\n"
 
 /***/ }),
 
@@ -155,6 +160,7 @@ module.exports = "<!--<table>-->\n  <!--<thead>-->\n  <!--<tr>-->\n    <!--<th>U
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__todo_service__ = __webpack_require__("../../../../../src/app/todo.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -165,23 +171,98 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var TodoListComponent = (function () {
-    function TodoListComponent() {
+    function TodoListComponent(_todoService) {
+        this._todoService = _todoService;
+        this.addButtonClicked = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
     }
     TodoListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._todoService.getCourseById('test')
+            .subscribe(function (data) {
+            console.log(data);
+            _this.data = data;
+            //this.addButtonClicked.emit({value:false});
+        }, function (error) { console.log(error); });
     };
     return TodoListComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+    __metadata("design:type", Object)
+], TodoListComponent.prototype, "addButtonClicked", void 0);
 TodoListComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'app-todo-list',
         template: __webpack_require__("../../../../../src/app/todo-list/todo-list.component.html"),
         styles: [__webpack_require__("../../../../../src/app/todo-list/todo-list.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__todo_service__["a" /* TodoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__todo_service__["a" /* TodoService */]) === "function" && _a || Object])
 ], TodoListComponent);
 
+var _a;
 //# sourceMappingURL=todo-list.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/todo.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__ = __webpack_require__("../../../../rxjs/add/operator/do.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/add/operator/filter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_filter__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var TodoService = (function () {
+    function TodoService(_http) {
+        this._http = _http;
+        this._courseApiUrl = '/api/todos/test';
+    }
+    TodoService.prototype.getCourseById = function (id) {
+        return this._http.get(this._courseApiUrl)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    TodoService.prototype.handleError = function (error) {
+        console.error(error);
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].throw(error.json().error || 'Server error');
+    };
+    return TodoService;
+}());
+TodoService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]) === "function" && _a || Object])
+], TodoService);
+
+var _a;
+//# sourceMappingURL=todo.service.js.map
 
 /***/ }),
 
@@ -206,7 +287,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/todo/todo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--<form>-->\n  <!--<label for=\"username\">UserName</label>-->\n  <!--<input id=\"username\" type=\"text\" disabled value={{2+3}}/>-->\n  <!--<label for=\"todo\">Todo:</label>-->\n  <!--<input type=\"text\" id=\"todo\" placeholder=\"Your todos\"/>-->\n  <!--<label for=\"status\">Status</label>-->\n  <!--<select id=\"status\" name=\"status\">-->\n    <!--<option value=\"done\">Done</option>-->\n    <!--<option value=\"todo\">Todo</option>-->\n  <!--</select>-->\n<!--</form>-->\n\n<form id=\"add-todo\" class=\"header\">\n  <h2>My To Do List</h2>\n    <input type=\"text\" id=\"my-todo\" placeholder=\"Title......\">\n    <span type=\"submit\" class=\"addBtn\" (click)=\"addButtonClick()\">Add</span>\n</form>\n"
+module.exports = "<!--<form>-->\n  <!--<label for=\"username\">UserName</label>-->\n  <!--<input id=\"username\" type=\"text\" disabled value={{2+3}}/>-->\n  <!--<label for=\"todo\">Todo:</label>-->\n  <!--<input type=\"text\" id=\"todo\" placeholder=\"Your todos\"/>-->\n  <!--<label for=\"status\">Status</label>-->\n  <!--<select id=\"status\" name=\"status\">-->\n    <!--<option value=\"done\">Done</option>-->\n    <!--<option value=\"todo\">Todo</option>-->\n  <!--</select>-->\n<!--</form>-->\n\n<form id=\"add-todo\" class=\"header\">\n  <h2>My To Do List</h2>\n    <input type=\"text\" id=\"my-todo\" placeholder=\"Title......\" required>\n    <span type=\"submit\" class=\"addBtn\" (click)=\"addButtonClick()\">Add</span>\n</form>\n"
 
 /***/ }),
 
@@ -216,6 +297,7 @@ module.exports = "<!--<form>-->\n  <!--<label for=\"username\">UserName</label>-
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__todo_service__ = __webpack_require__("../../../../../src/app/todo.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -226,18 +308,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var TodoComponent = (function () {
-    function TodoComponent() {
-        var _this = this;
-        this.pageTitleClicked = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
-        this.addButtonClicked = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
-        this.OnClicked = function () {
-            console.log("clicked");
-            _this.pageTitleClicked.emit("emitted value");
-        };
+    function TodoComponent(_todoService) {
+        this._todoService = _todoService;
+        //@Output() pageTitleClicked = new EventEmitter();
+        //@Output() addButtonClicked = new EventEmitter();
+        // OnClicked =  () => {
+        //   console.log("clicked");
+        //   this.pageTitleClicked.emit("emitted value");
+        // }
         this.addButtonClick = function (event) {
+            console.log(event);
             //event.preventDefault();
-            _this.addButtonClicked.emit({ value: true });
+            // let uname = +this._route.snapshot.params['uname'];
+            // this.pageTitle += `: ${uname}`;
+            //this.addButtonClicked.emit({value:true});
         };
     }
     return TodoComponent;
@@ -246,22 +332,16 @@ __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
     __metadata("design:type", String)
 ], TodoComponent.prototype, "pageTitle", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
-    __metadata("design:type", Object)
-], TodoComponent.prototype, "pageTitleClicked", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
-    __metadata("design:type", Object)
-], TodoComponent.prototype, "addButtonClicked", void 0);
 TodoComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'app-todo',
         template: __webpack_require__("../../../../../src/app/todo/todo.component.html"),
         styles: [__webpack_require__("../../../../../src/app/todo/todo.component.css")]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__todo_service__["a" /* TodoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__todo_service__["a" /* TodoService */]) === "function" && _a || Object])
 ], TodoComponent);
 
+var _a;
 //# sourceMappingURL=todo.component.js.map
 
 /***/ }),
